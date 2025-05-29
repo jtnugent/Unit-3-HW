@@ -40,12 +40,14 @@ root = tk.Tk()
 root.title("Random Pokémon Generator")
 root.geometry("400x400")
 root.resizable(False, False)
-        
-img_bytes = requests.get(formatted_data["sprite"],timeout=10).content
-pillow_image = Image.open(io.BytesIO(img_bytes)).resize((200,200))
-tk_image = ImageTk.PhotoImage(pillow_image)
+def fetch_image(url: str, pokemon_id: int) -> ImageTk.PhotoImage:
 
-def show_pokemon():
+    img_bytes = requests.get(formatted_data["sprite"],timeout=10).content
+    pillow_image = Image.open(io.BytesIO(img_bytes)).resize((200,200))
+    tk_image = ImageTk.PhotoImage(pillow_image)
+    return tk_image
+
+def show_pokemon(pokemon_id:int, formatted_data, tk_image)->None:
     try:
         root.img_label.photo = tk_image
         root.img_label.config(image=tk_image)
@@ -71,9 +73,13 @@ root.btn = tk.Button(
     command = show_pokemon
 )
 
-def fetch_image(url: str, pokemon_id: int) -> ImageTk.PhotoImage:
-def show_pokmeon(pokemon_id:int)->None
 
+
+url = API_URL
+pokemon_id = POKE_ID
+data = fetch_pokemon(pokemon_id)
+tk_image = fetch_image(url, pokemon_id)
+show_pokemon(pokemon_id, data, tk_image)
 
 
 root.mainloop()
