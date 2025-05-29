@@ -68,7 +68,6 @@ root.btn = tk.Button(
     font=("Helvetica", 14, "bold"),
     command = show_pokemon
 )
-root.btn.pack(fill="x", padx=20, pady=5)
 
 
 
